@@ -1,0 +1,47 @@
+div {
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+div.containers {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  align-content: stretch;
+}
+div.input {
+  text-align: center;
+  border: 2px solid #abc;
+  border-radius: 20px;
+  padding: 10%;
+  padding-bottom: 20%;
+  margin-top: 20%;
+  box-shadow: 0 10px 15px -8px #333;
+}
+div.display {
+  border: 2px solid #abc;
+  border-radius: 20px;
+  padding: 10%;
+  padding-bottom: 20%;
+  margin-top: 20%;
+  box-shadow: 0 10px 15px -8px #333;
+  display: none;
+}
+div.display.shown {
+  border: 2px solid #abc;
+  border-radius: 20px;
+  padding: 10%;
+  padding-bottom: 20%;
+  margin-top: 20%;
+  box-shadow: 0 10px 15px -8px #333;
+  display: block;
+}
+div.previsions {
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}/*# sourceMappingURL=style.css.map */

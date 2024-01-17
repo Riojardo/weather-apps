@@ -1,0 +1,49 @@
+div{
+    font-family: Georgia, 'Times New Roman', Times, serif; 
+    .containers{
+        display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+	align-content: stretch;
+    }
+    .input{
+        text-align: center;
+        border: 2px solid #abc;
+        border-radius: 20px;
+        padding: 10%;
+        padding-bottom: 20%;
+        margin-top: 20%;
+        box-shadow: 0 10px 15px -8px #333;
+}
+.display{
+    border: 2px solid #abc;
+    border-radius: 20px;
+    padding: 10%;
+    padding-bottom: 20%;
+    margin-top: 20%;
+    box-shadow: 0 10px 15px -8px #333;
+    display: none;
+    .shown{
+        border: 2px solid #abc;
+        border-radius: 20px;
+        padding: 10%;
+        padding-bottom: 20%;
+        margin-top: 20%;
+        box-shadow: 0 10px 15px -8px #333;
+        display: block;
+        
+      
+    }
+}
+.previsions{
+    display: flex;
+flex-direction: row;
+flex-wrap: nowrap;
+justify-content: center;
+align-items: center;
+align-content: center;
+}
+}
+
