@@ -7,6 +7,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<title>DOM events</title>
 	<script defer src="script.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 	<link rel="stylesheet" href="assets/style.css">
 </head>
 
@@ -19,20 +20,31 @@
             <input type="submit" value="submit" class="button">
         </div>
 	<div class="display">
+		
+		<div class="today">
 		<div class="day"></div>
+		<div id="time"></div>
 		<div class="temp"></div>
 		<div class="desc" ></div>
+	</div>
 		<div class="previsions">
+			<section>
 			<div class="day_0"></div>
 			<div class="day_1"></div>
 			<div class="day_2"></div>
 			<div class="day_3"></div>
-		</div>
-		<table>
-			<tr>
-			</tr>
-		</table>
+			</section>
+		
+		<canvas id="myChart" ></canvas>
 	</div>
+	<div class="webcam">
+		<div class="error"></div>
+		<iframe controls oncontextmenu="return false" src="https://media.tenor.com/dqH6ZBgOvMUAAAAi/dog-dance.gif"
+		width="345" height="300 frameborder="0" allowfullscreen></iframe>
+	</div>
+
+	</div>
+
 	
 </div>
 </body>
