@@ -2,7 +2,8 @@ document.addEventListener("DOMContentLoaded", function () {
   let button = document.querySelector(".button");
   let temp = document.querySelector(".temp");
   let API_key = "df6c563ee2770848e9bf0cf0363d6075";
-  let API_key_webcam = "8lN2jktHUWt3GJNfYLBpLUAeZurjcctR";
+  /*let API_key_webcam = "8lN2jktHUWt3GJNfYLBpLUAeZurjcctR"; ----> keywebcam for live server */
+  let API_key_webcam = "ARWNnz02oSx8TXIjdC3HYZmViD8RYBly"; /* ----> keywebcam for github page */
 
   let saved_input= localStorage.getItem("last_input");
   let city_input = document.querySelector(".input_value");
@@ -199,7 +200,7 @@ document.addEventListener("DOMContentLoaded", function () {
       console.log(data);
       let today_info = (data.list[0].dt_txt).split(" ")[0];
       let today_date = document.querySelector(".day");
-      today_date.textContent = today_info;
+      today_date.textContent = "Today is the : "  + today_info;
 
       let indices = [];
       for (let i = 7; i < data.list.length; i += 8) {
@@ -256,6 +257,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 });
+
 
 
 

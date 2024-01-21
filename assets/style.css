@@ -13,24 +13,24 @@ body {
 
 @keyframes glower {
   0% {
-    border-color: #ff0000;
-    box-shadow: 0 0 10px #ff0000;
+    border-color: rgb(159, 168, 69);
+    box-shadow: 0 0 10px rgb(189, 95, 40);
   }
   25% {
-    border-color: #00ff00;
-    box-shadow: 0 0 10px #00ff00;
+    border-color: rgb(57, 114, 237);
+    box-shadow: 0 0 10px rgb(176, 197, 46);
   }
   50% {
-    border-color: #0000ff;
-    box-shadow: 0 0 10px #0000ff;
+    border-color: rgb(244, 109, 190);
+    box-shadow: 0 0 10px rgb(114, 84, 254);
   }
   75% {
-    border-color: #ff0000;
-    box-shadow: 0 0 10px #ff0000;
+    border-color: rgb(23, 105, 157);
+    box-shadow: 0 0 10px rgb(79, 234, 28);
   }
   100% {
-    border-color: #00ff00;
-    box-shadow: 0 0 10px #00ff00;
+    border-color: rgb(93, 173, 178);
+    box-shadow: 0 0 10px rgb(105, 17, 0);
   }
 }
 div {
@@ -49,6 +49,7 @@ div div.input {
   align-items: center;
   animation: glower 6s infinite;
   margin-top: 15%;
+  background-color: #2a2828;
 }
 div .button {
   margin-top: 5%;
@@ -84,6 +85,7 @@ div .today, div .previsions {
   align-content: space-between;
   animation: glower 6s infinite;
   min-width: 340px;
+  background-color: #2a2828;
 }
 div .error {
   text-align: center;

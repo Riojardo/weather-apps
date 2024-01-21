@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
 
+
 body {
   background-color: #171717;
   color: #fff;
@@ -12,26 +13,34 @@ body {
   font-family: 'Poppins', sans-serif;
 }
 
+
+@function rgbRandom() {
+  $x: floor(random() * 255);
+  $y: floor(random() * 255);
+  $z: floor(random() * 255);
+  @return unquote("rgb(#{$x}, #{$y}, #{$z})");
+}
+
 @keyframes glower {
   0% {
-    border-color: #ff0000;
-    box-shadow: 0 0 10px #ff0000;
+    border-color: #{rgbRandom()};
+    box-shadow: 0 0 10px #{rgbRandom()};
   }
   25% {
-    border-color: #00ff00;
-    box-shadow: 0 0 10px #00ff00;
+    border-color: #{rgbRandom()};
+    box-shadow: 0 0 10px #{rgbRandom()};
   }
   50% {
-    border-color: #0000ff;
-    box-shadow: 0 0 10px #0000ff;
+    border-color: #{rgbRandom()};
+    box-shadow: 0 0 10px #{rgbRandom()};
   }
   75% {
-    border-color: #ff0000;
-    box-shadow: 0 0 10px #ff0000;
+    border-color: #{rgbRandom()};
+    box-shadow: 0 0 10px #{rgbRandom()};
   }
   100% {
-    border-color: #00ff00;
-    box-shadow: 0 0 10px #00ff00;
+    border-color: #{rgbRandom()};
+    box-shadow: 0 0 10px #{rgbRandom()};
   }
 }
 
@@ -51,6 +60,7 @@ div {
     align-items: center;
     animation: glower 6s infinite;
     margin-top: 15%;
+    background-color: #2a2828;
   }
 
   .button {
@@ -90,6 +100,7 @@ div {
     align-content: space-between;
     animation: glower 6s infinite;
     min-width: 340px;
+    background-color: #2a2828;
   }
 
   .error {
@@ -141,3 +152,4 @@ input {
   font-style: normal;
   font-weight: 500;
 }
+
