@@ -13,24 +13,24 @@ body {
 
 @keyframes glower {
   0% {
-    border-color: rgb(159, 168, 69);
-    box-shadow: 0 0 10px rgb(189, 95, 40);
+    border-color: rgb(118, 105, 176);
+    box-shadow: 0 0 10px rgb(143, 241, 160);
   }
   25% {
-    border-color: rgb(57, 114, 237);
-    box-shadow: 0 0 10px rgb(176, 197, 46);
+    border-color: rgb(13, 158, 251);
+    box-shadow: 0 0 10px rgb(230, 241, 36);
   }
   50% {
-    border-color: rgb(244, 109, 190);
-    box-shadow: 0 0 10px rgb(114, 84, 254);
+    border-color: rgb(116, 229, 64);
+    box-shadow: 0 0 10px rgb(175, 69, 143);
   }
   75% {
-    border-color: rgb(23, 105, 157);
-    box-shadow: 0 0 10px rgb(79, 234, 28);
+    border-color: rgb(41, 149, 123);
+    box-shadow: 0 0 10px rgb(209, 241, 158);
   }
   100% {
-    border-color: rgb(93, 173, 178);
-    box-shadow: 0 0 10px rgb(105, 17, 0);
+    border-color: rgb(144, 103, 250);
+    box-shadow: 0 0 10px rgb(42, 124, 174);
   }
 }
 div {
@@ -77,12 +77,6 @@ div .today, div .previsions {
   border-radius: 20px;
   padding: 15px; /* Adjusted padding */
   margin-top: 5%;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap;
-  justify-content: center;
-  align-items: center;
-  align-content: space-between;
   animation: glower 6s infinite;
   min-width: 340px;
   background-color: #2a2828;
@@ -111,7 +105,10 @@ iframe {
   border: 2px solid #abc;
   margin: 5%;
   border-radius: 10px;
-  padding: 10px; /* Adjusted padding */
+  padding: 10px;
+  font-size: 25px;
+  font-style: normal;
+  font-weight: 500;
 }
 
 canvas {
@@ -119,6 +116,7 @@ canvas {
   background-color: rgb(175, 166, 166);
   border: 2px solid rgba(255, 255, 255, 0.1);
   color: #fff;
+  margin-bottom: 5%;
 }
 
 input {
@@ -130,8 +128,17 @@ input {
   font-style: italic;
 }
 
-.day {
-  font-size: 25px;
-  font-style: normal;
-  font-weight: 500;
+.previsions {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  align-content: stretch;
+  min-height: auto;
+}
+
+label {
+  padding-bottom: 5%;
+  margin-top: 5%;
 }/*# sourceMappingURL=style.css.map */

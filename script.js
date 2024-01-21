@@ -1,9 +1,9 @@
-
 document.addEventListener("DOMContentLoaded", function () {
   let button = document.querySelector(".button");
+  let button_2 = document.querySelector(".button_compare");
   let temp = document.querySelector(".temp");
   let API_key = "df6c563ee2770848e9bf0cf0363d6075";
-  /*let API_key_webcam = "8lN2jktHUWt3GJNfYLBpLUAeZurjcctR"; ----> keywebcam for live server */
+  /*let API_key_webcam ="8lN2jktHUWt3GJNfYLBpLUAeZurjcctR"; ----> keywebcam for live server */
   let API_key_webcam =
     "ARWNnz02oSx8TXIjdC3HYZmViD8RYBly"; /* ----> keywebcam for github page */
 
@@ -67,46 +67,41 @@ document.addEventListener("DOMContentLoaded", function () {
 
   let x_values = [" "];
   let y_values = [];
+  let y_compare = [];
 
   async function data_list() {
     try {
-        let data_list = document.querySelector("#city_choice");
-        let city_input = document.querySelector(".input_value");
-        let city_value = city_input.value.trim();
-        let API = API_geo(city_value);
-        let response = await fetch(API);
+      let data_list = document.querySelector("#city_choice");
+      let city_input = document.querySelector(".input_value");
+      let city_value = city_input.value.trim();
+      let API = API_geo(city_value);
+      let response = await fetch(API);
 
-        if (!response.ok) {
-            console.log(`Error -> ${response.status}`);
-            return;
-        }
+      if (!response.ok) {
+        console.log(`Error -> ${response.status}`);
+        return;
+      }
 
-        let data = await response.json();
+      let data = await response.json();
+      console.log("WAAAAAAAAAGH " + data);
+      data_list.innerHTML = "";
 
-        // Check if data is an array
-        if (Array.isArray(data)) {
-            console.log("WAAAAAAAAAGH", data);
-            data_list.innerHTML = "";
+      let displayed_input = data.filter((city) =>
+        city.name.toLowerCase().startsWith(city_value.toLowerCase())
+      );
 
-            let displayed_input = data.filter((city) =>
-                city.name.toLowerCase().startsWith(city_value.toLowerCase())
-            );
-
-            displayed_input.forEach((element) => {
-                let option = document.createElement("option");
-                option.textContent = element.name;
-                console.log("City Name: " + element.name);
-                data_list.appendChild(option);
-            });
-        } else {
-            console.log("Invalid data format received:", data);
-        }
+      displayed_input.forEach((element) => {
+        let option = document.createElement("option");
+        option.textContent = element.name;
+        console.log("WAAAAAAAAAGH " + element.name);
+        data_list.appendChild(option);
+      });
     } catch (error) {
-        console.error("Error:", error.message);
+      console.error("Error:", error.message);
     }
-}
+  }
 
-document.querySelector(".input_value").addEventListener("input", data_list);
+  document.querySelector(".input_value").addEventListener("input", data_list);
 
   async function get_weather() {
     try {
@@ -138,21 +133,24 @@ document.querySelector(".input_value").addEventListener("input", data_list);
       icone.src = icone_Url;
       desc.appendChild(icone);
 
+      let intervalId;
+
       function get_time() {
         let time_zone = data.timezone;
+        console.log(data.timezone);
         let current_time = new Date();
         current_time.setSeconds(current_time.getSeconds() + time_zone);
         let time = document.querySelector("#time");
         time.innerHTML = "";
         let hour = current_time.toLocaleString().split(" ")[1];
-        time.textContent = hour;
+        time.innerHTML = hour;
         console.log(
           "Current Time:",
           current_time.toLocaleString().split(" ")[1]
         );
       }
 
-      setInterval(get_time, 1000);
+      intervalId = setInterval(get_time, 1000);
 
       let webcam_ID = null;
 
@@ -240,34 +238,94 @@ document.querySelector(".input_value").addEventListener("input", data_list);
           y_values.push((element.main.temp - 273.15).toFixed(2));
           x_values.push(week[weekday]);
         }
+       
       });
 
-      new Chart("myChart", {
-        type: "line",
-        data: {
-          labels: x_values,
-          datasets: [
-            {
-              label: "Temperature",
-              fill: false,
-              lineTension: 0,
-              backgroundColor: "rgba(0,0,255,1.0)",
-              borderColor: "rgb(255,255,255)",
-              data: y_values,
-            },
-          ],
-        },
-        options: {
-          legend: { display: true },
-          scales: {
-            yAxes: [
+       update_Chart();
+
+async function compare_city() {
+  try {
+    y_compare = [];
+
+    let city_selected = document.querySelector(".input_value_compare").value;
+    let API_2 = API_forecast(city_selected);
+    let response = await fetch(API_2);
+
+    if (!response.ok) {
+      console.log(`ERROR -> ${response.status}`);
+    }
+
+    let data = await response.json();
+    console.log(city_selected);
+    let indices = [];
+    for (let i = 0; i < data.list.length; i += 8) {
+      indices.push(i);
+    }
+    let selected_Data = indices.map((index) => data.list[index]);
+
+    selected_Data.forEach((element, index) => {
+      y_compare.push((element.main.temp - 273.15).toFixed(2));
+      y_values.push((element.main.temp - 273.15).toFixed(2));
+    });
+
+    console.log(y_compare);
+    console.log(y_values);
+
+    update_Chart();
+  } catch (error) {
+    console.error("Error:", error.message);
+  }
+}
+
+      button_2.addEventListener("click", async () => {
+        await compare_city();
+      });
+
+      function update_Chart() {
+        let city_1 = document.querySelector(".input_value").value;
+        let city_2 = document.querySelector(".input_value_compare").value;
+        let canvas = document.getElementById("Chart");
+        let context = canvas.getContext("2d");
+        let initial_Chart = Chart.getChart("Chart");
+        if (initial_Chart) {
+          initial_Chart.destroy();
+        }
+      
+        new Chart(context, {
+          type: "line",
+          data: {
+            labels: x_values,
+            datasets: [
               {
-                ticks: { min: -16, max: 40 },
+                label: `${city_1}`,
+                fill: false,
+                lineTension: 0,
+                backgroundColor: "rgba(0,0,255,1.0)",
+                borderColor: "blue",
+                data: y_values,
+              },
+              {
+                label: `${city_2}`,
+                fill: false,
+                lineTension: 0,
+                backgroundColor: "rgba(0,0,255,1.0)",
+                borderColor: "red",
+                data: y_compare,
               },
             ],
           },
-        },
-      });
+          options: {
+            legend: { display: true },
+            scales: {
+              yAxes: [
+                {
+                  ticks: { min: -16, max: 40 },
+                },
+              ],
+            },
+          },
+        });
+      }
     } catch (error) {
       console.error("Error in get_futur:", error.message);
     }
