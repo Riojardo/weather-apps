@@ -13,24 +13,24 @@ body {
 
 @keyframes glower {
   0% {
-    border-color: rgb(118, 105, 176);
-    box-shadow: 0 0 10px rgb(143, 241, 160);
+    border-color: rgb(20, 135, 252);
+    box-shadow: 0 0 10px rgb(26, 204, 228);
   }
   25% {
-    border-color: rgb(13, 158, 251);
-    box-shadow: 0 0 10px rgb(230, 241, 36);
+    border-color: rgb(31, 17, 38);
+    box-shadow: 0 0 10px rgb(198, 22, 124);
   }
   50% {
-    border-color: rgb(116, 229, 64);
-    box-shadow: 0 0 10px rgb(175, 69, 143);
+    border-color: rgb(129, 140, 198);
+    box-shadow: 0 0 10px rgb(14, 229, 38);
   }
   75% {
-    border-color: rgb(41, 149, 123);
-    box-shadow: 0 0 10px rgb(209, 241, 158);
+    border-color: rgb(236, 243, 147);
+    box-shadow: 0 0 10px rgb(30, 21, 35);
   }
   100% {
-    border-color: rgb(144, 103, 250);
-    box-shadow: 0 0 10px rgb(42, 124, 174);
+    border-color: rgb(25, 31, 43);
+    box-shadow: 0 0 10px rgb(50, 157, 181);
   }
 }
 div {
