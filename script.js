@@ -121,7 +121,7 @@ document.addEventListener("DOMContentLoaded", function () {
       let celsius = parseFloat(data.main.temp) - 273.15;
       console.log(celsius);
       y_values.push(celsius);
-      temp.innerHTML = celsius.toFixed(2) + " degrees C°";
+      temp.innerHTML = celsius.toFixed(2) + " degrees C° in " + city_selected;
       let desc = document.querySelector(".desc");
       desc.innerHTML = " ";
       let icone_Code = data.weather[0].icon;
