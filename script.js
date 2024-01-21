@@ -3,12 +3,13 @@ document.addEventListener("DOMContentLoaded", function () {
   let temp = document.querySelector(".temp");
   let API_key = "df6c563ee2770848e9bf0cf0363d6075";
   /*let API_key_webcam = "8lN2jktHUWt3GJNfYLBpLUAeZurjcctR"; ----> keywebcam for live server */
-  let API_key_webcam = "ARWNnz02oSx8TXIjdC3HYZmViD8RYBly"; /* ----> keywebcam for github page */
+  let API_key_webcam =
+    "ARWNnz02oSx8TXIjdC3HYZmViD8RYBly"; /* ----> keywebcam for github page */
 
-  let saved_input= localStorage.getItem("last_input");
+  let saved_input = localStorage.getItem("last_input");
   let city_input = document.querySelector(".input_value");
-  if(saved_input){
-    city_input.value = saved_input
+  if (saved_input) {
+    city_input.value = saved_input;
   }
   if (saved_input) {
     get_weather();
@@ -32,7 +33,7 @@ document.addEventListener("DOMContentLoaded", function () {
   function API_forecast(city_selected) {
     return `https://api.openweathermap.org/data/2.5/forecast?q=${city_selected}&appid=${API_key}`;
   }
-  
+
   function error_webcam() {
     let error_stream = document.querySelector(".error");
     error_stream.innerHTML = `
@@ -46,10 +47,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     let live = document.querySelector("iframe");
     live.style.display = "none";
-    let gif_script = document.createElement('script');
-    gif_script.type = 'text/javascript';
+    let gif_script = document.createElement("script");
+    gif_script.type = "text/javascript";
     gif_script.async = true;
-    gif_script.src = 'https://tenor.com/embed.js';
+    gif_script.src = "https://tenor.com/embed.js";
     document.body.appendChild(gif_script);
   }
 
@@ -70,11 +71,12 @@ document.addEventListener("DOMContentLoaded", function () {
     try {
       let data_list = document.querySelector("datalist");
       let city_input = document.querySelector(".input_value");
-      let city_value = city_input.value;
+      let city_value = city_input.value.trim();
       let API = API_geo(city_value);
       let response = await fetch(API);
       if (!response.ok) {
         console.log(`ERRor -> ${response.status}`);
+        return;
       }
       let data = await response.json();
       console.log(data);
@@ -108,40 +110,41 @@ document.addEventListener("DOMContentLoaded", function () {
       console.log("API data", data);
       let live = document.querySelector("iframe");
       live.style.display = "";
-      live.src=" ";
+      live.src = " ";
       let error_stream = document.querySelector(".error");
-      error_stream.innerHTML=" ";
-      
+      error_stream.innerHTML = " ";
+
       let celsius = parseFloat(data.main.temp) - 273.15;
       console.log(celsius);
       y_values.push(celsius);
       temp.innerHTML = celsius.toFixed(2) + " degrees C°";
       let desc = document.querySelector(".desc");
-      desc.innerHTML=" "
+      desc.innerHTML = " ";
       let icone_Code = data.weather[0].icon;
       let icone_Url = `https://openweathermap.org/img/w/${icone_Code}.png`;
       let icone = document.createElement("img");
       icone.src = icone_Url;
       desc.appendChild(icone);
-     
-      function get_time(){
-      
-      let time_zone = data.timezone;
-      let current_time = new Date();
-      current_time.setSeconds(current_time.getSeconds() + time_zone);
-      let time = document.querySelector("#time");
-      time.innerHTML=" ";
-      let hour = current_time.toLocaleString().split(' ')[1];
-      time.textContent = hour;
-      console.log('Current Time:', current_time.toLocaleString().split(' ')[1]);
+
+      function get_time() {
+        let time_zone = data.timezone;
+        let current_time = new Date();
+        current_time.setSeconds(current_time.getSeconds() + time_zone);
+        let time = document.querySelector("#time");
+        time.innerHTML = "";
+        let hour = current_time.toLocaleString().split(" ")[1];
+        time.textContent = hour;
+        console.log(
+          "Current Time:",
+          current_time.toLocaleString().split(" ")[1]
+        );
       }
 
-      setInterval(get_time,1000)
+      setInterval(get_time, 1000);
 
       let webcam_ID = null;
 
       async function get_webcam_ID() {
-
         let API = `https://api.windy.com/webcams/api/v3/webcams?lang=en&limit=50&offset=0&countries=${data.sys.country},string`;
         try {
           let response = await fetch(API, request);
@@ -160,12 +163,13 @@ document.addEventListener("DOMContentLoaded", function () {
           localStorage.setItem("last_input", city_selected);
 
           async function get_webcam() {
-
             let API = `https://api.windy.com/webcams/api/v3/webcams/${webcam_ID}?lang=en&include=player`;
             try {
               let response = await fetch(API, request);
               if (!response.ok) {
-                console.log(`HTTP error bla bla blas! Status: ${response.status}`);
+                console.log(
+                  `HTTP error bla bla blas! Status: ${response.status}`
+                );
                 error_webcam();
               }
               let data = await response.json();
@@ -184,7 +188,7 @@ document.addEventListener("DOMContentLoaded", function () {
       get_webcam_ID();
     } catch (error) {
       console.error("Error:", error.message);
-    }  
+    }
   }
 
   async function get_futur() {
@@ -198,9 +202,9 @@ document.addEventListener("DOMContentLoaded", function () {
       }
       let data = await response.json();
       console.log(data);
-      let today_info = (data.list[0].dt_txt).split(" ")[0];
+      let today_info = data.list[0].dt_txt.split(" ")[0];
       let today_date = document.querySelector(".day");
-      today_date.textContent = "Today is the : "  + today_info;
+      today_date.textContent = "Today is the : " + today_info;
 
       let indices = [];
       for (let i = 7; i < data.list.length; i += 8) {
@@ -257,9 +261,3 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 });
-
-
-
-
-
-
