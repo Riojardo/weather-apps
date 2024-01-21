@@ -70,37 +70,43 @@ document.addEventListener("DOMContentLoaded", function () {
 
   async function data_list() {
     try {
-      let data_list = document.querySelector("#city_choice");
-      let city_input = document.querySelector(".input_value");
-      let city_value = city_input.value.trim();
-      let API = API_geo(city_value);
-      let response = await fetch(API);
-  
-      if (!response.ok) {
-        console.log(`Error -> ${response.status}`);
-        return;
-      }
-  
-      let data = await response.json();
-      console.log("WAAAAAAAAAGH " + data);
-      data_list.innerHTML = "";
-  
-      let displayed_input = data.filter((city) =>
-        city.name.toLowerCase().startsWith(city_value.toLowerCase())
-      );
-  
-      displayed_input.forEach((element) => {
-        let option = document.createElement("option");
-        option.textContent = element.name;
-        console.log("WAAAAAAAAAGH " + element.name);
-        data_list.appendChild(option);
-      });
-    } catch (error) {
-      console.error("Error:", error.message);
-    }
-  }
+        let data_list = document.querySelector("#city_choice");
+        let city_input = document.querySelector(".input_value");
+        let city_value = city_input.value.trim();
+        let API = API_geo(city_value);
+        let response = await fetch(API);
 
-  document.querySelector(".input_value").addEventListener("input", data_list);
+        if (!response.ok) {
+            console.log(`Error -> ${response.status}`);
+            return;
+        }
+
+        let data = await response.json();
+
+        // Check if data is an array
+        if (Array.isArray(data)) {
+            console.log("WAAAAAAAAAGH", data);
+            data_list.innerHTML = "";
+
+            let displayed_input = data.filter((city) =>
+                city.name.toLowerCase().startsWith(city_value.toLowerCase())
+            );
+
+            displayed_input.forEach((element) => {
+                let option = document.createElement("option");
+                option.textContent = element.name;
+                console.log("City Name: " + element.name);
+                data_list.appendChild(option);
+            });
+        } else {
+            console.log("Invalid data format received:", data);
+        }
+    } catch (error) {
+        console.error("Error:", error.message);
+    }
+}
+
+document.querySelector(".input_value").addEventListener("input", data_list);
 
   async function get_weather() {
     try {
