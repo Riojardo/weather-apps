@@ -1,3 +1,4 @@
+
 document.addEventListener("DOMContentLoaded", function () {
   let button = document.querySelector(".button");
   let temp = document.querySelector(".temp");
@@ -81,7 +82,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }
   
       let data = await response.json();
-      console.log(data);
+      console.log("WAAAAAAAAAGH " + data);
       data_list.innerHTML = "";
   
       let displayed_input = data.filter((city) =>
@@ -91,6 +92,7 @@ document.addEventListener("DOMContentLoaded", function () {
       displayed_input.forEach((element) => {
         let option = document.createElement("option");
         option.textContent = element.name;
+        console.log("WAAAAAAAAAGH " + element.name);
         data_list.appendChild(option);
       });
     } catch (error) {
