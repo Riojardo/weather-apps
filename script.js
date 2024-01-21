@@ -65,8 +65,7 @@ document.addEventListener("DOMContentLoaded", function () {
     box.classList.toggle("shown");
   }
 
-  let x_values = [" "];
-  let y_values = [];
+
   let y_compare = [];
 
   async function data_list() {
@@ -105,6 +104,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   async function get_weather() {
     try {
+      let y_values = [];
       let city_selected = document.querySelector(".input_value").value;
       let API = get_API(city_selected);
       let response = await fetch(API);
@@ -133,7 +133,6 @@ document.addEventListener("DOMContentLoaded", function () {
       icone.src = icone_Url;
       desc.appendChild(icone);
 
-      let intervalId;
 
       function get_time() {
         let time_zone = data.timezone;
@@ -203,6 +202,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
   async function get_futur() {
     try {
+      let x_values = [" "];
+      let y_values = [];
       let city_selected = document.querySelector(".input_value").value;
       localStorage.setItem("last_input", city_selected);
       let API_2 = API_forecast(city_selected);
@@ -246,7 +247,6 @@ document.addEventListener("DOMContentLoaded", function () {
 async function compare_city() {
   try {
     y_compare = [];
-
     let city_selected = document.querySelector(".input_value_compare").value;
     let API_2 = API_forecast(city_selected);
     let response = await fetch(API_2);
