@@ -65,7 +65,6 @@ document.addEventListener("DOMContentLoaded", function () {
     box.classList.toggle("shown");
   }
 
-
   let y_compare = [];
 
   async function data_list() {
@@ -132,7 +131,6 @@ document.addEventListener("DOMContentLoaded", function () {
       let icone = document.createElement("img");
       icone.src = icone_Url;
       desc.appendChild(icone);
-
 
       function get_time() {
         let time_zone = data.timezone;
@@ -239,43 +237,44 @@ document.addEventListener("DOMContentLoaded", function () {
           y_values.push((element.main.temp - 273.15).toFixed(2));
           x_values.push(week[weekday]);
         }
-       
       });
 
-       update_Chart();
+      update_Chart();
 
-async function compare_city() {
-  try {
-    y_compare = [];
-    let city_selected = document.querySelector(".input_value_compare").value;
-    let API_2 = API_forecast(city_selected);
-    let response = await fetch(API_2);
+      async function compare_city() {
+        try {
+          y_compare = [];
+          let city_selected = document.querySelector(
+            ".input_value_compare"
+          ).value;
+          let API_2 = API_forecast(city_selected);
+          let response = await fetch(API_2);
 
-    if (!response.ok) {
-      console.log(`ERROR -> ${response.status}`);
-    }
+          if (!response.ok) {
+            console.log(`ERROR -> ${response.status}`);
+          }
 
-    let data = await response.json();
-    console.log(city_selected);
-    let indices = [];
-    for (let i = 0; i < data.list.length; i += 8) {
-      indices.push(i);
-    }
-    let selected_Data = indices.map((index) => data.list[index]);
+          let data = await response.json();
+          console.log(city_selected);
+          let indices = [];
+          for (let i = 0; i < data.list.length; i += 8) {
+            indices.push(i);
+          }
+          let selected_Data = indices.map((index) => data.list[index]);
 
-    selected_Data.forEach((element, index) => {
-      y_compare.push((element.main.temp - 273.15).toFixed(2));
-      y_values.push((element.main.temp - 273.15).toFixed(2));
-    });
+          selected_Data.forEach((element, index) => {
+            y_compare.push((element.main.temp - 273.15).toFixed(2));
+            y_values.push((element.main.temp - 273.15).toFixed(2));
+          });
 
-    console.log(y_compare);
-    console.log(y_values);
+          console.log(y_compare);
+          console.log(y_values);
 
-    update_Chart();
-  } catch (error) {
-    console.error("Error:", error.message);
-  }
-}
+          update_Chart();
+        } catch (error) {
+          console.error("Error:", error.message);
+        }
+      }
 
       button_2.addEventListener("click", async () => {
         await compare_city();
@@ -290,7 +289,7 @@ async function compare_city() {
         if (initial_Chart) {
           initial_Chart.destroy();
         }
-      
+
         new Chart(context, {
           type: "line",
           data: {
